@@ -84,7 +84,7 @@
     btn.disabled = on;
   }
 
-  /* ---------- wheel drawing ---------- */
+
   function drawWheel(canvas, segs, px) {
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
     canvas.width = canvas.height = px * dpr;
@@ -141,7 +141,7 @@
     }
   }
 
-  /* ---------- views ---------- */
+
   function renderTries() {
     const t = $('#tries');
     t.innerHTML = '';
@@ -195,7 +195,7 @@
     openWheel();
   }
 
-  /* ---------- spin ---------- */
+  
   async function spin() {
     if (spinning || me.spinsLeft < 1) return;
     spinning = true;
@@ -242,7 +242,7 @@
     confetti();
   }
 
-  /* ---------- confetti + snow ---------- */
+ 
   function confetti() {
     if (reduceMotion) return;
     const cv = $('#confetti'),
@@ -317,7 +317,7 @@
     })();
   })();
 
-  /* ---------- Kenya Supermarkets card / PayHero activation ---------- */
+ 
   function openRedeemModal() {
     if (!me || !me.voucherCode) return toast('Claim your voucher first.', true);
     if (me.cardActivated) {
@@ -413,7 +413,7 @@
     }, 6000);
   }
 
-  /* ---------- events ---------- */
+
   document.addEventListener('click', (e) => {
     const g = e.target.closest('[data-go]');
     if (g) {
@@ -511,7 +511,7 @@
     }
   });
 
-  // Redeem → activate Kenya Supermarkets card (PayHero KSh 160)
+ 
   if ($('#redeemBtn')) $('#redeemBtn').addEventListener('click', openRedeemModal);
   if ($('#closeRedeem'))
     $('#closeRedeem').addEventListener('click', () => {
@@ -597,7 +597,7 @@
     window.__rz = setTimeout(drawAll, 150);
   });
 
-  /* ---------- places left ---------- */
+  
   function renderSlots() {
     const left = cfg.slotsLeft,
       pct = Math.min(100, (cfg.taken / cfg.target) * 100);
@@ -614,7 +614,7 @@
     }
   }
 
-  /* ---------- live winners popups ---------- */
+  
   const SAMPLE = [
     ['Daisy', '0725', '475', 3240],
     ['Wanjiru', '0712', '908', 1800],
@@ -690,7 +690,7 @@
       renderSlots();
       drawAll();
     } catch {
-      /* landing still works offline */
+     
     }
     if (token) {
       try {

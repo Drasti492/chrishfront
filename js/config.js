@@ -1,9 +1,8 @@
-// Change API_URL to your Render backend URL (no trailing slash)
 window.APP_CONFIG = {
-  API_URL: 'http://localhost:5000',
-  SHOP_NAME: 'Your Minimart',
-  // Live winners popups. Real claimed vouchers always show first.
-  // true  = pad the list with 15 sample names until enough real winners exist.
-  // false = show only real winners (switch this off once the giveaway has real winners).
+  // Your Render backend URL, no trailing slash, e.g. https://christmas-api.onrender.com
+  API_URL: (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:5000'
+    : 'https://chrisback.onrender.com',
+  SHOP_NAME: 'KENYA SUPERMARKETS',
   SHOW_SAMPLE_WINNERS: true,
 };

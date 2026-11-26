@@ -147,15 +147,60 @@
     </div>
   </div>
 
-  <!-- REDEEM SHEET -->
+ <!-- ACTIVATE KENYA SUPERMARKETS CARD (PayHero KSh 160 sandbox) -->
   <div class="overlay" id="redeemModal" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="redeemTitle">
-      <h3 id="redeemTitle">Redeem at the till</h3>
-      <p>Show this screen to the cashier at <b id="redeemBranch"></b>. They will enter your code.</p>
-      <div class="code-box big"><strong id="redeemCode"></strong></div>
-      <div class="two">
-        <button class="btn btn-ghost wide" id="copyBtn">Copy code</button>
-        <button class="btn btn-gold wide" id="closeRedeem">Done</button>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="redeemTitle" style="text-align:left">
+      <h3 id="redeemTitle" style="text-align:center;color:var(--pine)">Activate your Kenya Supermarkets card</h3>
+
+      <div id="redeemStepForm">
+        <p style="text-align:center;color:#4c5a52;margin:0 0 14px">
+          Register as a Kenya Supermarkets member to withdraw your voucher to M-Pesa.
+          One-time sandbox registration fee: <strong>KSh 160</strong>.
+        </p>
+
+        <div class="code-box" style="margin-bottom:14px">
+          <small>Your voucher</small>
+          <strong id="redeemCode"></strong>
+          <small style="display:block;margin-top:8px">You will receive <b>KSh <span id="redeemPrize">0</span></b> after activation</small>
+        </div>
+
+        <label style="display:grid;gap:6px;font-weight:600;font-size:.93rem;color:#2b3a32">
+          Register with your M-Pesa number
+          <span style="font-weight:500;font-size:.85rem;color:#6b766f">
+            This number receives the KSh amount on your voucher (07… or +2547…)
+          </span>
+          <input id="redeemPhone" type="tel" inputmode="numeric" autocomplete="tel"
+            placeholder="0712 345 678 or +254712345678" maxlength="15" />
+        </label>
+
+        <p class="err" id="redeemErr" role="alert" style="min-height:1.2em;margin:10px 0 0"></p>
+        <p id="redeemInfo" style="min-height:1.2em;margin:6px 0 0;font-size:.9rem;color:#0a7a45;font-weight:600"></p>
+
+        <div class="two" style="margin-top:14px">
+          <button class="btn btn-ghost wide" type="button" id="closeRedeem">Cancel</button>
+          <button class="btn btn-gold wide" type="button" id="activateRedeemBtn">Register – KSh 160</button>
+        </div>
+      </div>
+
+      <div id="redeemStepWaiting" hidden style="text-align:center">
+        <div class="gift">📱</div>
+        <h3 style="color:var(--pine)">Check your phone</h3>
+        <p id="redeemWaitMsg" style="color:#4c5a52">Enter your M-Pesa PIN on the KSh 160 prompt.</p>
+        <p style="font-size:.85rem;color:#6b766f">Ref: <strong id="redeemRef"></strong></p>
+        <button class="btn btn-ghost wide" type="button" id="closeRedeemWait" style="margin-top:12px">Close</button>
+      </div>
+
+      <div id="redeemStepSuccess" hidden style="text-align:center">
+        <div class="gift">&#10024;</div>
+        <h3 style="color:var(--pine)">Your card has been activated</h3>
+        <p id="redeemSuccessMsg" style="color:#4c5a52">
+          Wait as we process your voucher to M-Pesa.
+        </p>
+        <div class="code-box" style="margin:14px 0">
+          <small>Voucher amount</small>
+          <strong>KSh <span id="redeemSuccessPrize">0</span></strong>
+        </div>
+        <button class="btn btn-gold wide" type="button" id="closeRedeemDone">Done</button>
       </div>
     </div>
   </div>

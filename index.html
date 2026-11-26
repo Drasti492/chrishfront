@@ -14,7 +14,6 @@
 <body>
   <canvas id="snow" aria-hidden="true"></canvas>
   <div id="toast" role="status" aria-live="polite"></div>
-  <div id="feed" aria-live="polite" aria-atomic="true"></div>
 
   <header class="bar">
     <a class="brand" href="#" id="brand"><span class="brand-mark">&#10052;</span><span id="shopName">Christmas Giveaway</span></a>
@@ -32,13 +31,13 @@
           <h1>Thank you for shopping with us this year.</h1>
           <p class="lead">Every customer who shopped at our branches gets a chance to spin for a Christmas shopping voucher worth up to <strong>Ksh 6,580</strong>. It replaces the old gift cards: sign up, spin, and claim.</p>
           <div class="slots" aria-live="polite">
-            <div class="slots-top"><strong id="slotsLeft">5,000</strong> <span id="slotsText">places left</span></div>
+            <div class="slots-top"><strong id="slotsLeft">5,000</strong> of 5,000 places left</div>
             <div class="meter"><span id="slotsBar"></span></div>
-            <small id="slotsNote">Our target is 5,000 customers.</small>
+            <small>Open to the first 5,000 customers only.</small>
           </div>
           <div class="cta-row">
-            <button class="btn btn-gold" data-go="signup">Sign up</button>
-            <button class="btn btn-ghost" data-go="login">Sign in</button>
+            <button class="btn btn-gold" data-go="signup">Sign up and spin</button>
+            <button class="btn btn-ghost" data-go="login">I already have an account</button>
           </div>
         </div>
         <div class="hero-wheel" aria-hidden="true">
@@ -47,11 +46,11 @@
         </div>
       </div>
       <ol class="steps">
-        <li><b>Sign up</b><span>Your name, Safaricom number, the supermarket you shopped at, and a 4-digit PIN.</span></li>
+        <li><b>Sign up</b><span>Your name, Safaricom number, the branch you shop at, and a 4-digit PIN.</span></li>
         <li><b>Spin the wheel</b><span>You get up to 3 spins to land a voucher.</span></li>
         <li><b>Claim and redeem</b><span>Get your receipt and voucher code, then show it at the till.</span></li>
       </ol>
-      <p class="fine">One voucher per phone number. Vouchers are redeemed at our branches while the giveaway budget lasts. Winners may appear in the live list as a first name and a partly hidden number.</p>
+      <p class="fine">One voucher per phone number. Vouchers are redeemed at our branches while stock of the giveaway budget lasts.</p>
     </section>
 
     <!-- SIGN UP -->
@@ -62,8 +61,8 @@
         <form id="signupForm" novalidate>
           <label>Your name<input name="username" autocomplete="name" placeholder="e.g. Wanjiru Kamau" maxlength="30" required /></label>
           <label>Safaricom number<input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="0712 345 678" maxlength="13" required /></label>
-          <label>Supermarket you shopped at this year
-            <input name="branch" autocomplete="off" placeholder="Type the supermarket or branch name" maxlength="60" required />
+          <label>Branch you shopped at this year
+            <select name="branch" id="branchSel" required><option value="">Choose a branch</option></select>
           </label>
           <div class="two">
             <label>4-digit PIN<input name="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="••••" required /></label>
@@ -72,7 +71,7 @@
           <p class="err" id="signupErr" role="alert"></p>
           <button class="btn btn-gold wide" type="submit">Create account</button>
         </form>
-        <p class="swap">Already registered? <button class="link" data-go="login">Sign in</button></p>
+        <p class="swap">Already registered? <button class="link" data-go="login">Log in</button></p>
       </div>
     </section>
 
@@ -80,12 +79,12 @@
     <section class="view" data-view="login" hidden>
       <div class="card form-card">
         <h2>Welcome back</h2>
-        <p class="sub">Sign in with your number and PIN.</p>
+        <p class="sub">Log in with your number and PIN.</p>
         <form id="loginForm" novalidate>
           <label>Safaricom number<input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="0712 345 678" maxlength="13" required /></label>
           <label>4-digit PIN<input name="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="current-password" placeholder="••••" required /></label>
           <p class="err" id="loginErr" role="alert"></p>
-          <button class="btn btn-gold wide" type="submit">Sign in</button>
+          <button class="btn btn-gold wide" type="submit">Log in</button>
         </form>
         <p class="swap">New here? <button class="link" data-go="signup">Sign up</button></p>
       </div>
@@ -121,7 +120,7 @@
             <dl>
               <div><dt>Name</dt><dd id="rName"></dd></div>
               <div><dt>Phone</dt><dd id="rPhone"></dd></div>
-              <div><dt>Supermarket</dt><dd id="rBranch"></dd></div>
+              <div><dt>Branch</dt><dd id="rBranch"></dd></div>
               <div><dt>Issued</dt><dd id="rDate"></dd></div>
               <div><dt>Status</dt><dd id="rStatus"></dd></div>
             </dl>
@@ -131,6 +130,7 @@
         <div class="t-actions">
           <button class="btn btn-gold wide" id="redeemBtn">Redeem now</button>
           <button class="btn btn-ghost wide" id="printBtn">Save or print receipt</button>
+          <button class="btn btn-ghost wide" id="replayBtn" hidden>Play again (demo only)</button>
         </div>
       </div>
     </section>
@@ -165,3 +165,13 @@
   <script src="js/app.js"></script>
 </body>
 </html>
+
+
+
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Drasti492/chrishfront.git
+git push -u origin main

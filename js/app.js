@@ -171,7 +171,7 @@
     $('#rAmount').textContent = fmt(me.prize);
     $('#rName').textContent = me.username;
     $('#rPhone').textContent = me.phone.replace(/^(\d{4})\d{3}(\d{3})$/, '$1 *** $2');
-    $('#rBranch').textContent = me.branch;
+    $('#rSpent').textContent = fmt(me.amountSpent);
     $('#rCode').textContent = me.voucherCode;
     $('#rDate').textContent = new Date(me.claimedAt).toLocaleString('en-KE', {
       dateStyle: 'medium',
@@ -486,15 +486,25 @@
       err = $('#signupErr'),
       b = $('button[type=submit]', f);
     err.textContent = '';
+
+
     const body = Object.fromEntries(new FormData(f));
-    body.phone = cleanPhone(body.phone);
-    if (body.username.trim().length < 2) return (err.textContent = 'Enter your name.');
-    if (!SAF.test(body.phone))
-      return (err.textContent = 'Enter a valid Safaricom number e.g. 0722 000 000.');
-    if (body.phone === '0712345678') return (err.textContent = 'Please use your own Safaricom number.');
-    if (body.branch.trim().length < 2)
-      return (err.textContent = 'Type the name of the supermarket you shopped at.');
-    if (!/^\d{4}$/.test(body.pin)) return (err.textContent = 'PIN must be exactly 4 digits.');
+body.phone = cleanPhone(body.phone);
+body.amountSpent = String(body.amountSpent || '').replace(/[,\s]/g, '');
+
+if (body.username.trim().length < 2) return (err.textContent = 'Enter your name.');
+if (!SAF.test(body.phone)) return (err.textContent = 'Enter a valid Safaricom number e.g. 0722 000 000.');
+if (body.phone === '0712345678') return (err.textContent = 'Please use your own Safaricom number.');
+
+const spent = Number(body.amountSpent);
+if (!Number.isFinite(spent) || spent < 1) {
+  return (err.textContent = 'Enter how much you spent this year in KSh (e.g. 25000).');
+}
+body.amountSpent = Math.round(spent);
+
+if (!/^\d{4}$/.test(body.pin)) return (err.textContent = 'PIN must be exactly 4 digits.');
+
+
     if (body.pin === '1234') return (err.textContent = 'Choose a PIN other than 1234.');
     if (body.pin !== body.confirmPin) return (err.textContent = 'The two PINs do not match.');
     busy(b, true, 'Creating account...');

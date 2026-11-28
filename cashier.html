@@ -1,24 +1,72 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Cashier | Redeem voucher</title>
-<style>
-body{font-family:system-ui,sans-serif;background:#0f3d2e;color:#fff8ea;margin:0;padding:20px;display:grid;place-items:start center;min-height:100vh}
-.c{background:#fff8ea;color:#1d1a16;border-radius:20px;padding:24px;width:min(440px,100%);display:grid;gap:12px}
-h1{margin:0;color:#0f3d2e;font-size:1.5rem}input,button{font:inherit;padding:13px;border-radius:12px;border:2px solid #d9d2c1;min-height:48px}
-button{background:#b3202e;color:#fff;border:0;font-weight:700;cursor:pointer}button.alt{background:#0f3d2e}
-#out{background:#fff;border-radius:12px;padding:12px;min-height:3em;white-space:pre-line}.ok{color:#0a7a45}.bad{color:#b3202e}
-</style></head><body>
-<div class="c"><h1>Cashier: redeem voucher</h1>
-<input id="key" type="password" placeholder="Cashier key" />
-<input id="branch" placeholder="Your branch (optional)" />
-<input id="code" placeholder="XMAS-XXXX-XXXX" autocapitalize="characters" />
-<button class="alt" id="look">Check voucher</button>
-<button id="redeem">Redeem voucher</button>
-<div id="out">Enter the code shown on the customer's phone.</div></div>
-<script src="js/config.js"></script>
-<script>
-const out=document.getElementById('out');
-async function call(p){const r=await fetch(APP_CONFIG.API_URL+'/api/game/cashier/'+p,{method:'POST',headers:{'Content-Type':'application/json','x-admin-key':key.value},body:JSON.stringify({code:code.value,branch:branch.value})});const d=await r.json();return{ok:r.ok,d}}
-look.onclick=async()=>{const{ok,d}=await call('lookup');out.className=ok?'':'bad';out.textContent=ok?`${d.username} (${d.phone})\nBranch: ${d.branch}\nAmount: Ksh ${d.amount.toLocaleString()}\nStatus: ${d.redeemed?'ALREADY REDEEMED':'Valid, not yet redeemed'}`:d.message};
-redeem.onclick=async()=>{const{ok,d}=await call('redeem');out.className=ok?'ok':'bad';out.textContent=d.message};
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cashier | Redeem voucher</title>
+  <style>
+    body{font-family:system-ui,sans-serif;background:#0f3d2e;color:#fff8ea;margin:0;padding:20px;display:grid;place-items:start center;min-height:100vh}
+    .c{background:#fff8ea;color:#1d1a16;border-radius:20px;padding:24px;width:min(440px,100%);display:grid;gap:12px}
+    h1{margin:0;color:#0f3d2e;font-size:1.5rem}
+    input,button{font:inherit;padding:13px;border-radius:12px;border:2px solid #d9d2c1;min-height:48px}
+    button{background:#b3202e;color:#fff;border:0;font-weight:700;cursor:pointer}
+    button.alt{background:#0f3d2e}
+    #out{background:#fff;border-radius:12px;padding:12px;min-height:3em;white-space:pre-line}
+    .ok{color:#0a7a45}.bad{color:#b3202e}
+  </style>
+</head>
+<body>
+  <div class="c">
+    <h1>Cashier: redeem voucher</h1>
+    <input id="key" type="password" placeholder="Cashier key" />
+    <input id="branch" placeholder="Your till / branch name (optional)" />
+    <input id="code" placeholder="XMAS-XXXX-XXXX" autocapitalize="characters" />
+    <button class="alt" id="look">Check voucher</button>
+    <button id="redeem">Redeem voucher</button>
+    <div id="out">Enter the code shown on the customer's phone.</div>
+  </div>
+  <script src="js/config.js"></script>
+  <script>
+    const out = document.getElementById('out');
+    const fmt = (n) => Number(n).toLocaleString('en-KE');
+
+    async function call(p) {
+      const r = await fetch(APP_CONFIG.API_URL + '/api/game/cashier/' + p, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-key': key.value,
+        },
+        body: JSON.stringify({
+          code: code.value,
+          branch: branch.value, // who redeemed at till (optional note)
+        }),
+      });
+      const d = await r.json();
+      return { ok: r.ok, d };
+    }
+
+    look.onclick = async () => {
+      const { ok, d } = await call('lookup');
+      out.className = ok ? '' : 'bad';
+      if (!ok) {
+        out.textContent = d.message;
+        return;
+      }
+      const spent =
+        d.amountSpent != null ? `Ksh ${fmt(d.amountSpent)}` : '—';
+      out.textContent =
+        `${d.username} (${d.phone})\n` +
+        `Spent this year: ${spent}\n` +
+        `Voucher: Ksh ${fmt(d.amount)}\n` +
+        `Status: ${d.redeemed ? 'ALREADY REDEEMED' : 'Valid, not yet redeemed'}`;
+    };
+
+    redeem.onclick = async () => {
+      const { ok, d } = await call('redeem');
+      out.className = ok ? 'ok' : 'bad';
+      out.textContent = d.message;
+    };
+  </script>
+</body>
+</html>

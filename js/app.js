@@ -182,7 +182,7 @@
       : me.redeemed
         ? 'Redeemed'
         : 'Ready to redeem';
-    $('#rThanks').textContent = `Thank you for shopping with us this year, ${me.username.split(' ')[0]}.`;
+    $('#rThanks').textContent = `Take care of your family with this small gift, ${me.username.split(' ')[0]}.`;
     show('receipt');
   }
   function route() {

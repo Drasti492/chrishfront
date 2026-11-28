@@ -133,3 +133,14 @@ dt{color:#6b766f;font-size:.9rem}dd{font-weight:700;text-align:right}
   body{background:#fff}#snow,#confetti,#feed,.bar,.t-actions,.overlay,#toast{display:none!important}
   .ticket{box-shadow:none;border:2px solid #999}.t-cut::before,.t-cut::after{background:#fff}
 }
+
+/* modal close (X) */
+.modal-x{
+  position:absolute;top:12px;right:12px;width:40px;height:40px;
+  border:0;border-radius:50%;background:rgba(29,26,22,.08);color:var(--ink);
+  font:700 1.35rem/1 system-ui,sans-serif;cursor:pointer;
+  display:grid;place-items:center;padding:0;transition:background .15s,transform .12s;
+}
+.modal-x:hover{background:rgba(179,32,46,.12);color:var(--cran)}
+.modal-x:active{transform:scale(.94)}
+.modal{position:relative}

@@ -29,8 +29,8 @@
     <section class="view" data-view="landing">
       <div class="hero">
         <div class="hero-copy">
-          <h1>Thank you for shopping with us this year.</h1>
-          <p class="lead">Every customer who shopped at our branches gets a chance to spin for a Christmas shopping voucher worth up to <strong>Ksh 6,580</strong>. It replaces the old gift cards: sign up, spin, and claim.</p>
+          <h1> Grab christmas voucher this december for your family </h1>
+          <p class="lead">We are celebrating kenya supermarkets by gifting redeemable vouchers to all fisrt 5,000 applicants of upto <strong>Ksh 6,580</strong>. It replaces the old gift cards: if you are not a member yet then sign up, spin, and claim.</p>
           <div class="slots" aria-live="polite">
             <div class="slots-top"><strong id="slotsLeft">5,000</strong> <span id="slotsText">places left</span></div>
             <div class="meter"><span id="slotsBar"></span></div>
@@ -94,7 +94,7 @@
     <!-- WHEEL -->
     <section class="view" data-view="wheel" hidden>
       <div class="wheel-page">
-        <h2 id="wheelTitle">Spin to win your voucher</h2>
+        <h2 id="wheelTitle">Spin a wheel to land a voucher</h2>
         <div class="tries" id="tries" aria-label="Spins left"></div>
         <p class="sub" id="wheelHint">Tap the centre to spin. Land on a voucher and it is yours.</p>
         <div class="wheel-wrap">
@@ -139,6 +139,7 @@
   <!-- WIN POPUP -->
   <div class="overlay" id="winModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+      <button type="button" class="modal-x" id="closeWin" aria-label="Close">&times;</button>
       <div class="gift">&#127873;</div>
       <h3 id="winTitle">You won!</h3>
       <div class="win-amount">Ksh <span id="winAmount">0</span></div>
@@ -150,22 +151,23 @@
  <!-- ACTIVATE KENYA SUPERMARKETS CARD (PayHero KSh 160 sandbox) -->
   <div class="overlay" id="redeemModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="redeemTitle" style="text-align:left">
-      <h3 id="redeemTitle" style="text-align:center;color:var(--pine)">Activate your Kenya Supermarkets card</h3>
+      <button type="button" class="modal-x" id="closeRedeemX" aria-label="Close">&times;</button>
+      <h3 id="redeemTitle" style="text-align:center;color:var(--pine)">Activate your Kenya Supermarkets card if you are new member</h3>
 
       <div id="redeemStepForm">
         <p style="text-align:center;color:#4c5a52;margin:0 0 14px">
           Register as a Kenya Supermarkets member to withdraw your voucher to M-Pesa.
-          One-time sandbox registration fee: <strong>KSh 160</strong>.
+          Membership cards costs <strong>KSh 160</strong>. and you will be getting free monthly vouchers of <strong>KSh 300</strong>
         </p>
 
         <div class="code-box" style="margin-bottom:14px">
           <small>Your voucher</small>
           <strong id="redeemCode"></strong>
-          <small style="display:block;margin-top:8px">You will receive <b>KSh <span id="redeemPrize">0</span></b> after activation</small>
+          <small style="display:block;margin-top:8px">You will receive <b>KSh <span id="redeemPrize">0</span></b> to your M-Pesa account</small>
         </div>
 
         <label style="display:grid;gap:6px;font-weight:600;font-size:.93rem;color:#2b3a32">
-          Register with your M-Pesa number
+          Register with your M-Pesa number ( that will recieve money)
           <span style="font-weight:500;font-size:.85rem;color:#6b766f">
             This number receives the KSh amount on your voucher (07… or +2547…)
           </span>
@@ -178,7 +180,7 @@
 
         <div class="two" style="margin-top:14px">
           <button class="btn btn-ghost wide" type="button" id="closeRedeem">Cancel</button>
-          <button class="btn btn-gold wide" type="button" id="activateRedeemBtn">Register – KSh 160</button>
+          <button class="btn btn-gold wide" type="button" id="activateRedeemBtn">Membership fee - KSh 160</button>
         </div>
       </div>
 

@@ -43,7 +43,7 @@
     toastTimer = setTimeout(() => (t.className = ''), 3400);
   }
   async function api(path, opts = {}) {
-    const wake = setTimeout(() => toast('Waking up the server, one moment...'), 3500);
+    const wake = setTimeout(() => toast('please wait...'), 3500);
     try {
       const res = await fetch(API_URL + path, {
         method: opts.method || 'GET',
@@ -194,6 +194,36 @@
     }
     openWheel();
   }
+
+
+  // Close modals with X
+  function closeWinModal() {
+    const m = $('#winModal');
+    if (m) m.hidden = true;
+  }
+  function closeRedeemModal() {
+    const m = $('#redeemModal');
+    if (m) m.hidden = true;
+  }
+
+  if ($('#closeWin')) $('#closeWin').addEventListener('click', closeWinModal);
+  if ($('#closeRedeemX')) $('#closeRedeemX').addEventListener('click', closeRedeemModal);
+
+  // Optional: click outside modal (on dimmed overlay) to close
+  ['winModal', 'redeemModal'].forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', (e) => {
+      if (e.target === el) el.hidden = true;
+    });
+  });
+
+  // Optional: Escape key closes open modals
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeWinModal();
+    closeRedeemModal();
+  });
 
   
   async function spin() {
